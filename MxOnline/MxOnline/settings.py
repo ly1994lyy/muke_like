@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'operation',
     'xadmin',
     'crispy_forms',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -133,7 +134,9 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+AUTHENTICATION_BACKENDS = (
+    'users.views.CustomBackend',
+)
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
@@ -141,3 +144,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+EMAIL_HOST = "smtp.qq.com"
+EMAIL_PORT = 25
+EMAIL_HOST_USER = "1141730852@qq.com"       # 邮箱地址
+EMAIL_HOST_PASSWORD = "vwpkrvxladfdggai"    # 密码
+EMAIL_USE_TLS= True
+EMAIL_FROM = "1141730852@qq.com"
