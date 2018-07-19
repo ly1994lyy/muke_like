@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import View
+from django.http import HttpResponse
+from .forms import UserAskForm
 from .models import CityDict, CourseOrg, Teacher
 from django.core.paginator import Paginator
 # Create your views here.
@@ -32,4 +34,26 @@ class OrgView(View):
             'all_citys': all_citys,
             'city_id': city_id,
             'hot_orgs': hot_orgs
+        })
+
+
+class AddUserAskView(View):
+    def post(self, request):
+        userask_form = UserAskForm(request.POST)
+        if userask_form.is_valid():
+            user_ask = userask_form.save(commit=True)
+            return HttpResponse('{"status": "success"}', content_type='application/json')
+        else:
+            return HttpResponse('{"status": "fail", "msg": "添加出错"}', content_type='application/json')
+
+
+class OrgHomeView(View):
+    def get(self, request, org_id):
+        course_org = get_object_or_404(CourseOrg, pk=org_id)
+        all_courses = course_org.course_set.all()[:4]
+        all_teacher = course_org.teacher_set.all()[:2]
+        return render(request, 'org-detail-homepage.html', {
+            'course_org': course_org,
+            'all_courses': all_courses,
+            'all_teacher': all_teacher,
         })
