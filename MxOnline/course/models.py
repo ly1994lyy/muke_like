@@ -18,7 +18,7 @@ class Course(models.Model):
     learn_times = models.IntegerField("学习时长(分钟数)", default=0)
     students = models.IntegerField("学习人数", default=0)
     fav_nums = models.IntegerField("收藏人数", default=0)
-    image = models.ImageField("封面图",upload_to="courses/%Y/%m",max_length=100)
+    image = models.ImageField("封面图",upload_to="courses/%Y/%m", max_length=100)
     click_nums = models.IntegerField("点击数", default=0)
     add_time = models.DateTimeField("添加时间", default=datetime.now,)
     course_org = models.ForeignKey(CourseOrg, on_delete=models.CASCADE, verbose_name="所属机构", null=True, blank=True)
@@ -56,8 +56,8 @@ class Video(models.Model):
 
 class CourseResource(models.Model):
     course = models.ForeignKey(Course, verbose_name="课程",on_delete=models.CASCADE)
-    name = models.CharField("名称",max_length=100)
-    download = models.FileField("资源文件",upload_to="course/resource/%Y/%m",max_length=100)
+    name = models.CharField("名称", max_length=100)
+    download = models.FileField("资源文件", upload_to="course/resource/%Y/%m",max_length=100)
     add_time = models.DateTimeField("添加时间", default=datetime.now)
 
     class Meta:
