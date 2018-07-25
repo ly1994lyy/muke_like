@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from django.db import models
-from organization.models import CourseOrg
+from organization.models import CourseOrg, Teacher
 
 
 # Create your models here.
@@ -13,6 +13,9 @@ class Course(models.Model):
     )
     name = models.CharField("课程名", max_length=50)
     desc = models.CharField("课程描述", max_length=300)
+    teacher = models.ForeignKey(Teacher, verbose_name='讲师', null=True, blank=True, on_delete=models.CASCADE)
+    youneed_know = models.CharField('课程须知', max_length=300, default='')
+    teacher_tell = models.CharField('老师告诉你', max_length=300, default='')
     detail = models.TextField("课程详情")
     degree = models.CharField('难度', choices=DEGREE_CHOICES, max_length=2)
     learn_times = models.IntegerField("学习时长(分钟数)", default=0)
@@ -28,6 +31,9 @@ class Course(models.Model):
     class Meta:
         verbose_name = "课程"
         verbose_name_plural = verbose_name
+
+    def get_course_lesson(self):
+        return self.lesson_set.all()
 
     def get_zj_nums(self):
         return self.lesson_set.all().count()
@@ -48,13 +54,18 @@ class Lesson(models.Model):
         verbose_name = "章节"
         verbose_name_plural = verbose_name
 
+    def get_lesson_video(self):
+        return self.video_set.all()
+
     def __str__(self):
         return '《{0}》课程的章节 >> {1}'.format(self.course, self.name)
 
 
 class Video(models.Model):
-    lesson = models.ForeignKey(Lesson, verbose_name="章节",on_delete=models.CASCADE)
-    name = models.CharField("视频名",max_length=100)
+    lesson = models.ForeignKey(Lesson, verbose_name="章节", on_delete=models.CASCADE)
+    name = models.CharField("视频名", max_length=100)
+    url = models.CharField('访问地址', default='', max_length=200)
+    learn_times = models.IntegerField("学习时长(分钟数)", default=0)
     add_time = models.DateTimeField("添加时间", default=datetime.now)
 
     class Meta:
@@ -65,7 +76,7 @@ class Video(models.Model):
 class CourseResource(models.Model):
     course = models.ForeignKey(Course, verbose_name="课程",on_delete=models.CASCADE)
     name = models.CharField("名称", max_length=100)
-    download = models.FileField("资源文件", upload_to="course/resource/%Y/%m",max_length=100)
+    download = models.FileField("资源文件", upload_to="course/resource/%Y/%m", max_length=100)
     add_time = models.DateTimeField("添加时间", default=datetime.now)
 
     class Meta:
