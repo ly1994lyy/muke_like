@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import View
 from .models import Course, CourseResource
 from django.core.paginator import Paginator
-from operation.models import UserFavorite, CourseComments
+from operation.models import UserFavorite, CourseComments, UserCourse
 from django.http import HttpResponse
 from utils.mixin_utils import LoginRequiredMixin
 # Create your views here.
