@@ -33,4 +33,5 @@ urlpatterns = [
     path('org/', include('organization.urls'), name='org'),
     path('course/', include('course.urls'), name='course'),
     re_path(r'^media/(?P<path>.*)', serve, {"document_root": MEDIA_ROOT}),
+    path('users/', include('users.urls'), name='users'),
 ]

@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
+{% load staticfiles %}
 
-<head>
-	<meta charset="UTF-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
-	<title>课程机构列表 - 慕学在线网</title>
-	<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
-	<link rel="stylesheet" type="text/css" href="/static/css/animate.css">
-	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
-    
-    <script src="/static/js/jquery.min.js" type="text/javascript"></script>
-    <script src="/static/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+{% block title %}课程机构列表{% endblock %}
+
+{% block custom_bread %}{% endblock %}
 
 </head>
 <body>
@@ -101,7 +94,7 @@
 <!--crumbs start-->
 
 
-
+{% block content %}
     <div class="banner">
 			<div class="wp">
 				<div class="fl">
@@ -544,43 +537,9 @@
 			</div>
 		</div>
 	</section>
+{% endblock %}
 
-<footer>
-		<div class="footer">
-			<div class="wp">
-				<ul class="cont">
-					<li class="logo"><a href=""><img src="/static/images/footlogo.png"/></a></li>
-					<li class="code"><img src="/static/images/code.jpg"/><p class="center">扫描关注微信</p></li>
-					<li class="third"><img class="fl" src="/static/images/tell.png"/><p class="tell">33333333</p><p class="time">周一至周日 9:00-18:00</p></li>
-				</ul>
 
-			</div>
-			<p class="line"></p>
-			<div class="wp clear">
-                <span class="fl">? 2016 www.projectsedu.com 慕学在线-在线学习交流平台 保留所有权利</span>
-                <span class="fr">copyright ? 2016 ICP备案证书号：蜀ICP备xxxxx号-1</span>
-			</div>
-		</div>
-	</footer>
-
-<section>
-    <ul class="sidebar">
-        <li class="qq">
-            <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2023525077&site=qq&menu=yes"></a>
-        </li>
-        <li class="totop"></li>
-    </ul>
-</section>
-<script src="/static/js/selectUi.js" type='text/javascript'></script>
-<script src="/static/js/deco-common.js" type='text/javascript'></script>
-<script type="text/javascript" src="/static/js/plugins/laydate/laydate.js"></script>
-<script src="/static/js/plugins/layer/layer.js"></script>
-<script src="/static/js/plugins/queryCity/js/public.js" type="text/javascript"></script>
-<script src="/static/js/unslider.js" type="text/javascript"></script>
-<script src="/static/js/plugins/jquery.scrollLoading.js"  type="text/javascript"></script>
-<script src="/static/js/deco-common.js"  type="text/javascript"></script>
-
-    <script type="text/javascript" src="/static/js/index.js"></script>
-
-</body>
-</html>
+{% block custom_js %}
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+{% endblock %}

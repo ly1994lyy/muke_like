@@ -5,6 +5,7 @@ from django.core.paginator import Paginator
 from operation.models import UserFavorite, CourseComments, UserCourse
 from django.http import HttpResponse
 from utils.mixin_utils import LoginRequiredMixin
+from django.db.models import Q
 # Create your views here.
 
 
@@ -12,6 +13,14 @@ class CourseListView(View):
     def get(self, request):
         courses = Course.objects.all().order_by('-add_time')
         hot_courses = Course.objects.all().order_by('-click_nums')[:3]
+        # 搜索功能
+        search_keywords = request.GET.get('keywords', '')
+        if search_keywords:
+            # icontains是包含的意思（不区分大小写）
+            # Q可以实现多个字段，之间是or的关系
+            courses = courses.filter(
+                Q(name__icontains=search_keywords) | Q(desc__icontains=search_keywords) | Q(
+                    detail__icontains=search_keywords))
         sort = request.GET.get('sort', '')
         if sort:
             if sort == 'student':
