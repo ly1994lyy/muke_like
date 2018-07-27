@@ -35,3 +35,9 @@ urlpatterns = [
     re_path(r'^media/(?P<path>.*)', serve, {"document_root": MEDIA_ROOT}),
     path('users/', include('users.urls'), name='users'),
 ]
+
+
+# 全局404页面配置
+handler404 = 'users.views.pag_not_found'
+# 全局500页面配置
+handler500 = 'users.views.page_error'

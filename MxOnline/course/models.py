@@ -23,6 +23,7 @@ class Course(models.Model):
     fav_nums = models.IntegerField("收藏人数", default=0)
     image = models.ImageField("封面图",upload_to="courses/%Y/%m", max_length=100)
     click_nums = models.IntegerField("点击数", default=0)
+    is_banner = models.BooleanField('是否轮播', default=False)
     add_time = models.DateTimeField("添加时间", default=datetime.now,)
     course_org = models.ForeignKey(CourseOrg, on_delete=models.CASCADE, verbose_name="所属机构", null=True, blank=True)
     category = models.CharField('课程类别', max_length=20, default='')

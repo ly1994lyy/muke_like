@@ -68,6 +68,8 @@ class CourseDetailView(View):
 class CourseInfoView(LoginRequiredMixin, View):
     def get(self, request, course_id):
         course = get_object_or_404(Course, pk=course_id)
+        course.students += 1
+        course.save()
         # 查询用户是否已经学习了该课程
         user_courses = UserCourse.objects.filter(user=request.user, course=course)
         if not user_courses:
