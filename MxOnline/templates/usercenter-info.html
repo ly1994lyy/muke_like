@@ -61,19 +61,19 @@
 				<form class="perinform" id="jsEditUserForm" autocomplete="off">
 					<ul class="right">
 						<li>昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：
-                           <input type="text" name="nick_name" id="nick_name" value=""{{ request.user.nick_name }} maxlength="10">
+                           <input type="text" name="nick_name" id="nick_name" value="{{ request.user.nick_name }}" maxlength="10">
                             <i class="error-tips"></i>
                         </li>
 						<li>生&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日：
-                           <input type="text" id="birth_day" name="birday" value="{{ request.user.bir }}" readonly="readonly"/>
+                           <input type="text" id="birth_day" name="birday" value="{{ request.user.birthday }}" readonly="readonly"/>
                             <i class="error-tips"></i>
 						</li>
 						<li>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：
-							<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio"  name="gender" value="male" {% if request.user.gender == 'male' %}checked="checked"{% endif %}>男</label>
-							<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="gender" value="female" {% if request.user.gender == 'female' %}checked="checked"{% endif %}>女</label>
+							<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio"  name="gender" value="male" {% if request.user.genders == 'male' %}checked="checked"{% endif %}>男</label>
+							<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="gender" value="female" {% if request.user.genders == 'female' %}checked="checked"{% endif %}>女</label>
 						</li>
 						<li class="p_infor_city">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：
-                            <input type="text" name="address" id="address" placeholder="请输入你的地址" value="{{ request.user.adress }}" maxlength="10">
+                            <input type="text" name="address" id="address" placeholder="请输入你的地址" value="{{ request.user.address }}" maxlength="10">
 						    <i class="error-tips"></i>
                         </li>
 						<li>手&nbsp;&nbsp;机&nbsp;&nbsp;号：
